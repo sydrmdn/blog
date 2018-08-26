@@ -74,4 +74,12 @@ class StoryController extends Controller
         Session::flash('success', 'Story permanently deleted!');
         return redirect()->route('story.index');
     }
+
+    public function restore(Story $story, $id)
+    {
+        $trashed_story = Story::onlyTrashed()->where('id', $id)->first();
+        $trashed_story->restore();
+        Session::flash('success', 'Story restored!');
+        return redirect()->route('story.index');
+    }
 }

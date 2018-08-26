@@ -28,4 +28,5 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/admin/story/{id}/update', 'StoryController@update')                      ->name('story.update');
     Route::delete('/admin/story/{id}/delete', 'StoryController@delete')                     ->name('story.delete');
     Route::delete('/admin/story/{id}/destroy', 'StoryController@destroy')                   ->name('story.destroy');
+    Route::post('/admin/story/{id}/restore', 'StoryController@restore')                     ->name('story.restore');
 });

@@ -34,8 +34,12 @@
                 @foreach ($trashed_stories as $trashed_story)
                 <div class="card mb-3">
                     <div class="card-body">
+                        <form action="{{ route('story.restore', ['id' => $trashed_story->id]) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-success btn-sm float-right ml-2">Restore!</button>
+                        </form>
                         <form action="{{ route('story.destroy', ['id' => $trashed_story->id]) }}" method="POST">
-                            @csrf {{ method_field('DELETE') }}
+                            @csrf @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm float-right">Delete permanently!</button>
                         </form>
                         <h6>{{ $trashed_story->title }}</h6>
