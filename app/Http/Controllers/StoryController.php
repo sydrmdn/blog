@@ -58,8 +58,11 @@ class StoryController extends Controller
         //
     }
 
-    public function destroy(Story $story)
+    public function destroy(Story $story, $id)
     {
-        //
+        $story = Story::find($id);
+        $story->delete();
+        Session::flash('success', 'Story deleted!');
+        return redirect()->route('story.index');
     }
 }
