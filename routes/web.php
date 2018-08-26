@@ -18,3 +18,13 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/story/', 'StoryController@index')                                    ->name('story.index');
+    Route::get('/admin/story/create', 'StoryController@create')                             ->name('story.create');
+    Route::post('/admin/story/', 'StoryController@store')                                   ->name('story.store');
+    Route::get('/admin/story/{id}', 'StoryController@show')                                 ->name('story.show');
+    Route::get('/admin/story/{id}/edit', 'StoryController@edit')                            ->name('story.edit');
+    Route::patch('/admin/story/{id}/update', 'StoryController@update')                      ->name('story.update');
+    Route::delete('/admin/story/{id}/destroy', 'StoryController@destroy')                   ->name('story.destroy');
+});
