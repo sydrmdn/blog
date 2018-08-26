@@ -12,6 +12,7 @@
                 <h5>{{ $story->title }}</h5>
                 <p>{{ $story->body }}</p>
                 <p>{{ $story->image }}</p>
+                <p>{{ $story->slug }}</p>
             </div>
         </div>
         <br> 

@@ -5,15 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Story;
 use Session;
-use DB;
 
 class StoryController extends Controller
 {
     public function index()
     {
-        $stories = DB::table('stories')
-                    ->orderBy('updated_at', 'desc')
-                    ->get();
+        $stories = Story::orderBy('updated_at', 'desc')->get();
         return view('admin.stories.index', compact('stories'));
     }
 
@@ -27,7 +24,8 @@ class StoryController extends Controller
         $this->validate($request, [
             'title' => 'required|max:255',
             'body' => 'required|max:255',
-            'image' => 'required'
+            'image' => 'required',
+            'slug' => 'required'
         ]);
         // Image handling
         // $image = $request->image;
@@ -38,6 +36,7 @@ class StoryController extends Controller
         $story->title = $request->title;
         $story->body = $request->body;
         $story->image = $request->image;
+        $story->slug = $request->slug;
         $story->save();
         Session::flash('success', 'Story created!');
         return redirect()->route('story.index');

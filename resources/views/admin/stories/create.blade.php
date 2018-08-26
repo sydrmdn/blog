@@ -9,8 +9,7 @@
 
             <div class="form-group">
                 <label>Title:</label>
-                <input type="text" name="title" class="form-control"> 
-                @if ($errors->has('title'))
+                <input type="text" name="title" class="form-control"> @if ($errors->has('title'))
                 <p class="text-danger">{{ $errors->first('title') }}</p>
                 @endif
             </div>
@@ -25,9 +24,15 @@
 
             <div class="form-group">
                 <label>Image:</label>
-                <input type="file" name="image" class="form-control-file">
-                @if ($errors->has('image'))
+                <input type="file" name="image" class="form-control-file"> @if ($errors->has('image'))
                 <p class="text-danger">{{ $errors->first('image') }}</p>
+                @endif
+            </div>
+
+            <div class="form-group">
+                <label>Slug:</label>
+                <input type="text" name="slug" class="form-control"> @if ($errors->has('slug'))
+                <p class="text-danger">{{ $errors->first('slug') }}</p>
                 @endif
             </div>
 
