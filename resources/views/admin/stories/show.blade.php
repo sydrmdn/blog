@@ -5,7 +5,7 @@
     <div class="card-body">
         <div class="card">
             <div class="card-body">
-                <form action="{{ route('story.destroy', ['id' => $story->id]) }}" method="POST">
+                <form action="{{ route('story.delete', ['id' => $story->id]) }}" method="POST">
                     @csrf {{ method_field('DELETE') }}
                     <button type="submit" class="btn btn-danger btn-sm float-right">Delete</button>
                 </form>

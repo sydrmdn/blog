@@ -11,7 +11,8 @@ class StoryController extends Controller
     public function index()
     {
         $stories = Story::orderBy('updated_at', 'desc')->get();
-        return view('admin.stories.index', compact('stories'));
+        $trashed_stories = Story::onlyTrashed()->orderBy('deleted_at', 'desc')->get();
+        return view('admin.stories.index', compact('stories', 'trashed_stories'));
     }
 
     public function create()
@@ -58,11 +59,19 @@ class StoryController extends Controller
         //
     }
 
-    public function destroy(Story $story, $id)
+    public function delete(Story $story, $id)
     {
         $story = Story::find($id);
         $story->delete();
         Session::flash('success', 'Story deleted!');
+        return redirect()->route('story.index');
+    }
+
+    public function destroy(Story $story, $id)
+    {
+        $trashed_story = Story::withTrashed()->where('id', $id)->first();
+        $trashed_story->forceDelete();
+        Session::flash('success', 'Story permanently deleted!');
         return redirect()->route('story.index');
     }
 }
