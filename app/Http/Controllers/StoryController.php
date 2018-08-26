@@ -42,9 +42,10 @@ class StoryController extends Controller
         return redirect()->route('story.index');
     }
 
-    public function show(Story $story)
+    public function show(Story $story, $id)
     {
-        //
+        $story = Story::find($id);
+        return view('admin.stories.show', compact('story'));
     }
 
     public function edit(Story $story)
