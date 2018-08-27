@@ -55,6 +55,7 @@ class TagController extends Controller
     public function destroy(Tag $tag, $id)
     {
         $tag = Tag::find($id);
+        $tag->stories()->detach();
         $tag->delete();
         Session::flash('success', 'Tag deleted!');
         return redirect()->back();

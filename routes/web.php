@@ -13,7 +13,7 @@
 
 // Show Story and Tag relationship
 Route::get('/relay', function () {
-    return App\Story::find(19)->tags;
+    return App\Story::find(18)->tags;
 });
 
 Route::get('/', function () {

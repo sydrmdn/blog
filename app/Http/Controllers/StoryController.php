@@ -44,7 +44,7 @@ class StoryController extends Controller
         $story->image = $request->image;
         $story->slug = $request->slug;
         $story->save();
-        $story->tags()->attach($request->tags); // Attach to pivot table
+        $story->tags()->attach($request->tags); // An array, attach to pivot table
         Session::flash('success', 'Story created!');
         return redirect()->route('story.index');
     }
@@ -94,6 +94,7 @@ class StoryController extends Controller
     public function destroy(Story $story, $id)
     {
         $trashed_story = Story::withTrashed()->where('id', $id)->first();
+        $trashed_story->tags()->detach();
         $trashed_story->forceDelete();
         Session::flash('success', 'Story permanently deleted!');
         return redirect()->route('story.index');
