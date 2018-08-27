@@ -5,6 +5,7 @@
         <a href="" class="float-right" data-toggle="modal" data-target="#exampleModal">Trash</a>
     </div>
     <div class="card-body">
+        @if ($stories->count() > 0)
         @foreach ($stories as $story)
         <div class="card">
             <div class="card-body">
@@ -16,7 +17,11 @@
                 <p>{{ $story->slug }}</p>
             </div>
         </div>
-        <br> @endforeach
+        <br>
+        @endforeach
+        @else
+        <p>No story here..</p>
+        @endif
     </div>
 </div>
 
@@ -31,6 +36,7 @@
                 </button>
             </div>
             <div class="modal-body">
+                @if ($trashed_stories->count() > 0) 
                 @foreach ($trashed_stories as $trashed_story)
                 <div class="card mb-3">
                     <div class="card-body">
@@ -47,6 +53,9 @@
                     </div>
                 </div>
                 @endforeach
+                @else
+                <p>Trash some here..</p>
+                @endif
             </div>
         </div>
     </div>

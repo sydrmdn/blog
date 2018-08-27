@@ -11,7 +11,9 @@ class StoryController extends Controller
     public function index()
     {
         $stories = Story::orderBy('updated_at', 'desc')->get();
-        $trashed_stories = Story::onlyTrashed()->orderBy('deleted_at', 'desc')->get();
+        $trashed_stories = Story::onlyTrashed()
+                                ->orderBy('deleted_at', 'desc')
+                                ->get();
         return view('admin.stories.index', compact('stories', 'trashed_stories'));
     }
 
@@ -30,8 +32,8 @@ class StoryController extends Controller
         ]);
         // Image handling
         // $image = $request->image;
-        // $image_new_name = time().$image->getClientOriginalName();
-        // $image->move('images/stories', $image_new_name);
+        // $image_new_name = time() . $image->getClientOriginalName();
+        // $image->move('path/to/where/', $image_new_name);
         // *****
         $story = new Story;
         $story->title = $request->title;
@@ -49,14 +51,30 @@ class StoryController extends Controller
         return view('admin.stories.show', compact('story'));
     }
 
-    public function edit(Story $story)
+    public function update(Request $request, Story $story, $id)
     {
-        //
-    }
-
-    public function update(Request $request, Story $story)
-    {
-        //
+        $this->validate($request, [
+            'title' => 'required|max:255',
+            'body' => 'required|max:255',
+            'image' => 'sometimes',
+            'slug' => 'required'
+        ]);
+        $story = Story::find($id);
+        // Image handling
+        // if ($request->hasFile('image')) {
+        //     $image = $request->image;
+        //     $image_new_name = $image->getClientOriginalName();
+        //     $image->move('path/to/where/', $image);
+        //     $story->image = 'path/to/where/' . $image_new_name;
+        // }
+        // *****
+        $story->title = $request->title;
+        $story->body = $request->body;
+        // $story->image = $request->image;
+        $story->slug = $request->slug;
+        $story->save();
+        Session::flash('success', 'Story updated!');
+        return redirect()->back();
     }
 
     public function delete(Story $story, $id)

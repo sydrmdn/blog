@@ -3,18 +3,41 @@
 <div class="card">
     <div class="card-header">Your Stories</div>
     <div class="card-body">
-        <div class="card">
-            <div class="card-body">
-                <form action="{{ route('story.delete', ['id' => $story->id]) }}" method="POST">
-                    @csrf {{ method_field('DELETE') }}
-                    <button type="submit" class="btn btn-danger btn-sm float-right">Delete</button>
-                </form>
-                <h5>{{ $story->title }}</h5>
-                <p>{{ $story->body }}</p>
-                <p>{{ $story->image }}</p>
-                <p>{{ $story->slug }}</p>
+        <form action="{{ route('story.delete', ['id' => $story->id]) }}" method="POST">
+            @csrf @method('DELETE')
+            <button type="submit" class="btn btn-danger btn-sm float-right">Delete</button>
+        </form>
+        <form action="{{ route('story.update', ['id' => $story->id]) }}" method="POST">
+            @csrf @method('PATCH')
+            <div class="form-group">
+                <label>Title:</label>
+                <input type="text" name="title" class="form-control" value="{{ $story->title }}"> @if ($errors->has('title'))
+                <p class="text-danger">{{ $errors->first('title') }}</p>
+                @endif
             </div>
-        </div>
+            <div class="form-group">
+                <label>Body:</label>
+                <textarea name="body" class="form-control">{{ $story->body }}</textarea>
+                @if ($errors->has('body'))
+                <p class="text-danger">{{ $errors->first('body') }}</p>
+                @endif
+            </div>
+            <div class="form-group">
+                <label>Image:</label>
+                <input type="file" name="image" class="form-control-file" value="{{ $story->image }}"> @if ($errors->has('image'))
+                <p class="text-danger">{{ $errors->first('image') }}</p>
+                @endif
+            </div>
+            <div class="form-group">
+                <label>Slug:</label>
+                <input type="text" name="slug" class="form-control" value="{{ $story->slug }}"> @if ($errors->has('slug'))
+                <p class="text-danger">{{ $errors->first('slug') }}</p>
+                @endif
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Update!</button>
+            </div>
+        </form>
     </div>
 </div>
 
