@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStoryTagTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateStoryTagTable extends Migration
      */
     public function up()
     {
-        Schema::create('story_tag', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('story_id')->unsigned();
-            $table->integer('tag_id')->unsigned();
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateStoryTagTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('story_tag');
+        Schema::dropIfExists('roles');
     }
 }

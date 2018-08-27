@@ -84,7 +84,10 @@
                             <img class="mr-3" src="https://materializecss.com/images/yuna.jpg" alt="" width="64px" height="64px">
                             <div class="media-body">
                                 <h5 class="mt-0">{{ Auth::user()->name }}</h5>
-                                {{ Auth::user()->email }}
+                                <p>{{ Auth::user()->email }}</p>
+                                @foreach(Auth::user()->roles as $role)
+                                <p>{{ $role->name }}</p>
+                                @endforeach
                             </div>
                         </div>
                         @endauth
