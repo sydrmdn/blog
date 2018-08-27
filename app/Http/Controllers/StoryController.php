@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Story;
+use App\Tag;
 use Session;
 
 class StoryController extends Controller
@@ -19,7 +20,8 @@ class StoryController extends Controller
 
     public function create()
     {
-        return view('admin.stories.create');
+        $tags = Tag::all();
+        return view('admin.stories.create', compact('tags'));
     }
 
     public function store(Request $request)
@@ -28,7 +30,8 @@ class StoryController extends Controller
             'title' => 'required|max:255',
             'body' => 'required|max:255',
             'image' => 'required',
-            'slug' => 'required'
+            'slug' => 'required',
+            'tags' => 'required'
         ]);
         // Image handling
         // $image = $request->image;
@@ -41,14 +44,16 @@ class StoryController extends Controller
         $story->image = $request->image;
         $story->slug = $request->slug;
         $story->save();
+        $story->tags()->attach($request->tags); // Attach to pivot table
         Session::flash('success', 'Story created!');
         return redirect()->route('story.index');
     }
 
     public function show(Story $story, $id)
     {
+        $tags = Tag::all();
         $story = Story::find($id);
-        return view('admin.stories.show', compact('story'));
+        return view('admin.stories.show', compact('story', 'tags'));
     }
 
     public function update(Request $request, Story $story, $id)
@@ -73,6 +78,7 @@ class StoryController extends Controller
         // $story->image = $request->image;
         $story->slug = $request->slug;
         $story->save();
+        $story->tags()->sync($request->tags); // Sync the pivot table
         Session::flash('success', 'Story updated!');
         return redirect()->back();
     }

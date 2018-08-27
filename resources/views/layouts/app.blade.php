@@ -91,6 +91,7 @@
                         <div class="list-group">
                             <a href="{{ route('story.create') }}" class="list-group-item list-group-item-action">New story</a>
                             <a href="{{ route('story.index') }}" class="list-group-item list-group-item-action">Stories</a>
+                            <a href="{{ route('tag.index') }}" class="list-group-item list-group-item-action">Tags</a>
                             <a href="#" class="list-group-item list-group-item-action">General</a>
                             <a href="#" class="list-group-item list-group-item-action">Profile</a>
                         </div>
