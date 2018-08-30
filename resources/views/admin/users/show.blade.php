@@ -12,7 +12,7 @@
                     </div>
                     <h5>
                         <span class="badge badge-primary">
-                            @foreach($user->roles as $role) {{ $role->name }} @endforeach
+                            Entahla
                         </span>
                     </h5>
                 </div>

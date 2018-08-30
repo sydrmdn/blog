@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use App\Role;
 
 class RegisterController extends Controller
 {
@@ -68,8 +67,7 @@ class RegisterController extends Controller
             'name'     => $data['name'],
             'email'    => $data['email'],
             'password' => bcrypt($data['password']),
-          ]);
-        $user->roles()->attach(Role::where('name', 'author')->first()); // Assign new user to author role by default
+        ]);
         return $user;
     }
 }

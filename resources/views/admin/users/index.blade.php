@@ -17,7 +17,7 @@
                     </div>
                     <h5>
                         <span class="badge badge-primary">
-                            @foreach($user->roles as $role) {{ $role->name }} @endforeach
+                           Entahla
                         </span>
                     </h5>
                 </div>
@@ -45,17 +45,6 @@
                     <div class="form-group">
                         <label>Email:</label>
                         <input type="text" name="email" class="form-control"> @if ($errors->has('email'))
-                        <p class="text-danger">{{ $errors->first('email') }}</p>
-                        @endif
-                    </div>
-                    <div class="form-group">
-                        <label>Roles:</label>
-                        <select name="role" class="custom-select">
-                            @foreach ($roles as $role)
-                            <option value="{{ $role->id }}">{{ $role->name }}</option>
-                            @endforeach
-                        </select>
-                        @if ($errors->has('email'))
                         <p class="text-danger">{{ $errors->first('email') }}</p>
                         @endif
                     </div>

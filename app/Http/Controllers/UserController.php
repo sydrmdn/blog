@@ -4,16 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use App\Role;
 use Session;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $roles = Role::all();
         $users = User::orderBy('created_at', 'desc')->get();
-        return view('admin.users.index', compact('users', 'roles'));
+        return view('admin.users.index', compact('users'));
     }
 
     public function create()
@@ -25,8 +23,7 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'role' => 'required'
+            'password' => 'required|string|min:6|confirmed'
         ]);
         // dd($request->all());
         $user = new User;
@@ -41,7 +38,6 @@ class UserController extends Controller
         $user->facebook_url = '';
         // *****
         $user->save();
-        $user->roles()->attach($request->role); // Attach to role pivot table
         Session::flash('success', 'User created!');
         return redirect()->back();
     }
