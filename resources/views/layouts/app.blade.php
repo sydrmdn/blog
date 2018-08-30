@@ -81,13 +81,10 @@
                     <div class="card-body">
                         @auth
                         <div class="media mb-4">
-                            <img class="mr-3" src="https://materializecss.com/images/yuna.jpg" alt="" width="64px" height="64px">
+                            <img class="mr-3 rounded-circle" src="{{ Auth::user()->avatar }}" alt="" width="64px" height="64px">
                             <div class="media-body">
                                 <h5 class="mt-0">{{ Auth::user()->name }}</h5>
                                 <p>{{ Auth::user()->email }}</p>
-                                @foreach(Auth::user()->roles as $role)
-                                <p>{{ $role->name }}</p>
-                                @endforeach
                             </div>
                         </div>
                         @endauth
@@ -95,8 +92,8 @@
                             <a href="{{ route('story.create') }}" class="list-group-item list-group-item-action">New story</a>
                             <a href="{{ route('story.index') }}" class="list-group-item list-group-item-action">Stories</a>
                             <a href="{{ route('tag.index') }}" class="list-group-item list-group-item-action">Tags</a>
-                            <a href="#" class="list-group-item list-group-item-action">General</a>
-                            <a href="#" class="list-group-item list-group-item-action">Profile</a>
+                            <a href="" class="list-group-item list-group-item-action">General</a>
+                            <a href="{{ route('user.index') }}" class="list-group-item list-group-item-action">Team</a>
                         </div>
                     </div>
                 </div>

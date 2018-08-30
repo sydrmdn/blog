@@ -45,3 +45,11 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/admin/tag/{id}/update', 'TagController@update')                      ->name('tag.update');
     Route::delete('/admin/tag/{id}/destroy', 'TagController@destroy')                     ->name('tag.destroy');
 });
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/team/', 'UserController@index')                                    ->name('user.index');
+    Route::get('/admin/team/{slug}', 'UserController@show')                                 ->name('user.show');
+    Route::post('/admin/team/', 'UserController@store')                                   ->name('user.store');
+    Route::patch('/admin/team/{id}/update', 'UserController@update')                      ->name('user.update');
+    Route::patch('/admin/team/{id}/password', 'UserController@password')                      ->name('user.password');
+});
